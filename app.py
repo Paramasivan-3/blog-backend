@@ -2,9 +2,11 @@
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 import sqlite3
+import os  # Add this line to import os
+
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://blog-app-eight-inky.vercel.app/"}})  # Allow all origins
 
 DATABASE = 'blog.db'
 
@@ -48,6 +50,9 @@ def delete_post(post_id):
         conn.commit()
         return jsonify({'message': 'Post deleted'}), 200
 
+
 if __name__ == '__main__':
     init_db()
-    app.run(port=5000)
+    port = int(os.environ.get("PORT", 5000))  # Use PORT from Render, default to 5000 for local dev
+    app.run(host="0.0.0.0", port=port)  # Bind to all network interfaces
+
