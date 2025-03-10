@@ -6,7 +6,7 @@ import os  # Add this line to import os
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://blog-app-eight-inky.vercel.app/"}})  # Allow all origins
+CORS(app, resources={r"/*": {"origins": "https://blog-app-eight-inky.vercel.app"}})  # Allow all origins
 
 DATABASE = 'blog.db'
 
